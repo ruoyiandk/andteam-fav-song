@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>&TEAM 歌曲二選一大賽</title>
-    <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         :root {
             --primary-pink: #ffb7c5;
@@ -105,14 +104,105 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            padding: 15px;
+            justify-content: center;
+            padding: 40px 15px;
             cursor: pointer;
             transition: all 0.25s ease;
             box-shadow: 0 6px 15px rgba(0,0,0,0.03);
-            overflow: hidden;
+            min-height: 180px;
         }
 
-        .song-img {
-            width: 100%;
-            aspect-ratio: 1
+        .song-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            word-break: break-word;
+            line-height: 1.4;
+        }
+
+        .song-card:first-child:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-pink);
+            box-shadow: 0 12px 20px rgba(255, 183, 197, 0.4);
+        }
+
+        .song-card:last-child:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-yellow);
+            box-shadow: 0 12px 20px rgba(255, 232, 158, 0.6);
+        }
+
+        .result-zone {
+            display: none;
+        }
+
+        .winner-crown {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+
+        .winner-name {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            background: linear-gradient(45deg, #ff6b8b, #ffca28);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .restart-btn {
+            background: #444;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 20px;
+        }
+
+        .restart-btn:hover {
+            background: #222;
+        }
+
+        @media (max-width: 600px) {
+            .game-zone {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
+            .vs-circle {
+                margin: -5px 0;
+            }
+            .song-card {
+                width: 100%;
+                min-height: 140px;
+                padding: 30px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="game-ui">
+        <h1>&TEAM 歌曲二選一</h1>
+        <div class="round-title" id="round-text">32 強賽 (1 / 16)</div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+
+        <div class="game-zone">
+            <div class="song-card" id="card-a" onclick="selectSong(0)">
+                <div class="song-title" id="title-a">載入中...</div>
+            </div>
+            <div class="vs-circle">VS</div>
+            <div class="song-card" id="card-b" onclick="selectSong(1)">
+                <div class="song-title" id="title-b">載入中...</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="result-zone" id="result-ui">
+        <div class="winner-crown">👑</div>
+        <h2>你心中最愛的 &TEAM
